@@ -35,6 +35,15 @@ async def ban_error(ctx, error):
     elif isinstance(error, commands.MemberNotFound):
         await ctx.send("User not found.")
 
-
+@bot.command()
+async def check_admin(ctx):
+    # Mengecek apakah bot memiliki izin administrator di server
+    bot_member = ctx.guild.get_member(bot.user.id)
+    
+    # Menggunakan permissions_in untuk mengecek izin bot
+    if bot_member.guild_permissions.administrator:
+        await ctx.send("Bot ini adalah administrator di server ini.")
+    else:
+        await ctx.send("Bot ini bukan administrator di server ini.")
 
 bot.run(token)
